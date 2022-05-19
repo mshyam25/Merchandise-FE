@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { userConstants } from '../constants/userConstants'
 import { orderConstants } from '../constants/order.Constants'
-import { cartConstants } from '../constants/cardConstants'
+import { API } from '../../utils'
 
 const login = (email, password) => async (dispatch) => {
   try {
@@ -13,7 +13,7 @@ const login = (email, password) => async (dispatch) => {
       },
     }
     const { data } = await axios.post(
-      '/api/users/login',
+      `${API}/api/users/login`,
       { email, password },
       config
     )
@@ -50,7 +50,7 @@ const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      '/api/users',
+      `${API}/api/users`,
       {
         email,
         password,
@@ -88,7 +88,7 @@ const getUserDetails = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/users/${id}`, config)
+    const { data } = await axios.get(`${API}/api/users/${id}`, config)
 
     dispatch({ type: userConstants.USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
@@ -116,7 +116,7 @@ const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put('/api/users/profile', user, config)
+    const { data } = await axios.put(`${API}/api/users/profile`, user, config)
 
     dispatch({ type: userConstants.USER_UPDATE_PROFILE_SUCCESS, payload: data })
   } catch (error) {
@@ -142,7 +142,7 @@ const listUsers = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const { data } = await axios.get('/api/users', config)
+    const { data } = await axios.get(`${API}/api/users`, config)
 
     dispatch({ type: userConstants.USER_LIST_SUCCESS, payload: data })
   } catch (error) {
@@ -170,7 +170,7 @@ const deleteUser = (id) => async (dispatch, getState) => {
       },
     }
 
-    await axios.delete(`/api/users/${id}`, config)
+    await axios.delete(`${API}/api/users/${id}`, config)
 
     dispatch({ type: userConstants.USER_DELETE_SUCCESS })
   } catch (error) {
@@ -199,7 +199,11 @@ const updateUser = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+    const { data } = await axios.put(
+      `${API}/api/users/${user._id}`,
+      user,
+      config
+    )
 
     dispatch({ type: userConstants.USER_UPDATE_SUCCESS })
     dispatch({ type: userConstants.USER_DETAILS_SUCCESS, payload: data })
