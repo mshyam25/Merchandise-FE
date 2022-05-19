@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getUserDetails, updateUserProfile } from '../redux/actions/userActions'
 import { listMyOrders } from '../redux/actions/orderActions'
 
@@ -17,6 +17,7 @@ const ProfileScreen = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const params = useParams()
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
@@ -34,7 +35,7 @@ const ProfileScreen = () => {
       navigate('/login')
     } else {
       if (!user.name) {
-        dispatch(getUserDetails('profile'))
+        dispatch(getUserDetails(params.id))
         dispatch(listMyOrders())
       } else {
         setName(user.name)
