@@ -13,7 +13,7 @@ const OrderListScreen = () => {
 
   const orderList = useSelector((state) => state.orderList)
   const { loading, error, orders } = orderList
-  console.log(orders)
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -28,11 +28,10 @@ const OrderListScreen = () => {
   return (
     <>
       <h1>Orders</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
+      {loading && <Loader />}
+      {error && <Message variant='danger'>{error}</Message>}
+
+      {orders ? (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
@@ -79,6 +78,8 @@ const OrderListScreen = () => {
             ))}
           </tbody>
         </Table>
+      ) : (
+        ''
       )}
     </>
   )

@@ -13,9 +13,9 @@ import {
   createProduct,
 } from '../redux/actions/productActions'
 
-const ProductListScreen = ({ history, match }) => {
+const ProductListScreen = () => {
   const dispatch = useDispatch()
-  const params = useParams()
+
   const navigate = useNavigate()
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
@@ -39,7 +39,6 @@ const ProductListScreen = ({ history, match }) => {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    console.log('product list screen')
     if (!userInfo || !userInfo.isAdmin) {
       navigate('/login')
     }
@@ -48,7 +47,6 @@ const ProductListScreen = ({ history, match }) => {
       dispatch({ type: productConstants.PRODUCT_CREATE_RESET })
       navigate(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      console.log('dispatch products')
       dispatch(listProducts())
     }
   }, [

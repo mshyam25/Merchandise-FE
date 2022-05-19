@@ -6,6 +6,7 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import { API } from '../utils'
 import {
   getOrderDetails,
   payOrder,
@@ -44,7 +45,7 @@ const OrderScreen = () => {
   useEffect(() => {
     if (!userInfo) navigate('/login')
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get('/api/config/paypal')
+      const { data: clientId } = await axios.get(`${API}/paypalclient`)
       const script = document.createElement('script')
       script.type = 'text/javascript'
       script.async = true
@@ -55,7 +56,6 @@ const OrderScreen = () => {
       }
       document.body.appendChild(script)
     }
-
     if (!order || order._id !== params.id || successPay || successDeliver) {
       dispatch({ type: orderConstants.ORDER_PAY_RESET })
       dispatch({ type: orderConstants.ORDER_DELIVER_RESET })
