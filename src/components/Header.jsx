@@ -20,7 +20,9 @@ const Header = () => {
       <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>Manchester United</Navbar.Brand>
+            <Navbar.Brand>
+              <img src='images/logo.png' className='logo' />
+            </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />

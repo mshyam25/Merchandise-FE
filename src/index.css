@@ -14,3 +14,9 @@ h2 {
   font-size: 1.4rem;
   padding: 0.5rem 0;
 }
+
+.logo {
+  height: 3.6rem;
+  width: 5rem;
+  border-radius: 20%;
+}
