@@ -7,7 +7,7 @@ import Loader from '../components/Loader'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getUserDetails, updateUserProfile } from '../redux/actions/userActions'
 import { listMyOrders } from '../redux/actions/orderActions'
-
+import { userConstants } from '../redux/constants/userConstants'
 const ProfileScreen = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -38,9 +38,15 @@ const ProfileScreen = () => {
         dispatch(getUserDetails(params.id))
         dispatch(listMyOrders())
       } else {
+        dispatch({ type: userConstants.USER_UPDATE_PROFILE_RESET })
         setName(user.name)
         setEmail(user.email)
       }
+    }
+    if (success) {
+      setTimeout(() => {
+        navigate('/')
+      }, 3000)
     }
   }, [navigate, dispatch, userInfo, user])
   const submitHandler = (e) => {

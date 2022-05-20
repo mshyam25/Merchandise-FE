@@ -6,7 +6,7 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../redux/actions/userActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-
+import { userConstants } from '../redux/constants/userConstants'
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -22,6 +22,8 @@ const LoginScreen = () => {
   useEffect(() => {
     if (userInfo) {
       navigate(redirect)
+    } else {
+      dispatch({ type: userConstants.USER_LOGOUT })
     }
   }, [userInfo, redirect])
   const submitHandler = (e) => {

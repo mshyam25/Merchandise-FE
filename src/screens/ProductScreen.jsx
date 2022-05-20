@@ -11,7 +11,7 @@ import {
   Form,
   FormControl,
 } from 'react-bootstrap'
-import Rating from '../components/Rating'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { listProductDetails } from '../redux/actions/productActions'
 import Loader from '../components/Loader'
@@ -52,12 +52,7 @@ const ProductScreen = () => {
               <ListGroup.Item>
                 <h2>{product.name}</h2>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                />
-              </ListGroup.Item>
+
               <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
               <ListGroup.Item>
                 Description : {product.description}
